@@ -1,0 +1,20 @@
+TODO
+
+(Mechanics)
+1. Website interface
+  - Static site hosted with GitHub pages?
+  - Learn tailwind
+  - JS should just send a HTTP request
+2. Terminal interface
+  - Make HTTP request with shell? (can you even do this?)
+3. Server
+  - API code
+  - Database of users? Or just IPs?
+  - Database of messages to-be-viewed
+  - Host this online
+    - Railway? Azure? Heroku, even? I still need a good solution for this...
+
+(Content/guidelines)
+- Messages should delete after set amount of time viewed
+- This needs to be HTTPS at some point
+- Way to create account with HTTP requests, both from website and terminal
