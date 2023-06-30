@@ -14,11 +14,41 @@
             <!-- stupid temp solution: make h1 have a border to "complete" the border of the messages box -->
 
             <div class="border border-black border-t-white w-[80%] min-w-[500px] h-[80%] min-h-fit">
-                <div id="messages" class="overflow-y-scroll overflow-x-hidden h-fit max-h-full">
+                <div id="messages" class="overflow-y-scroll overflow-x-hidden h-fit max-h-full flex flex-col items-center">
                     <!-- Extra whitespace for testing
                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     -->
+
+                    <div class="relative m-2 p-2 border border-black w-[80%]">
+                        <p class="text-lg">User 1</p>
+                        <div>...msg here...</div>
+
+                        <div class="absolute right-0 top-0 m-0 p-0 flex flex-col items-end w-fit h-full">
+                            <div class="m-0 p-1 w-fit hover:cursor-pointer">
+                                <img src="imgs/threedots.png" class="h-5">
+                            </div>
+
+                            <div class="m-1 mt-auto p-0.5 border border-black w-fit hover:cursor-pointer">
+                                <p class="text-sm">Reply</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative m-2 p-2 border border-black w-[80%]">
+                        <p class="text-lg">User 2</p>
+                        <div>...msg here...</div>
+
+                        <div class="absolute right-0 top-0 m-0 p-0 flex flex-col items-end w-fit h-full">
+                            <div class="m-0 p-1 w-fit hover:cursor-pointer">
+                                <img src="imgs/threedots.png" class="h-5">
+                            </div>
+
+                            <div class="m-1 mt-auto p-0.5 border border-black w-fit hover:cursor-pointer">
+                                <p class="text-sm">Reply</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
