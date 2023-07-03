@@ -8,6 +8,7 @@
         <script src="/script/main.js"></script>
 
         <script src="/script/elt/progress-ring.js"></script>
+        <script src="/script/elt/message-box.js"></script>
     </head>
 
     <body>
@@ -22,41 +23,8 @@
                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     -->
 
-                    <div class="relative m-2 p-2 border border-black w-[80%]">
-                        <p class="text-lg">User 1</p>
-                        <div>...msg here...</div>
-
-                        <div class="absolute right-0 top-0 m-0 p-0 flex flex-col items-end w-fit h-full">
-                            <div class="m-0 p-1 w-fit hover:cursor-pointer">
-                                <img src="imgs/threedots.png" class="h-5">
-                                <div class="absolute left-[100%] top-0 m-2 mt-0 p-2 pb-1 border border-black hover:cursor-auto">
-                                    <p class="border border-black mb-1 p-1 text-center text-sm whitespace-nowrap hover:cursor-pointer" onclick="maRead(event)">Mark as <br> read</p>
-                                    <div class="flex justify-center">
-                                        <progress-ring stroke="3" radius="15" progress="0" time="1" hidden></progress-ring>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="m-1 mt-auto p-0.5 border border-black w-fit hover:cursor-pointer">
-                                <p class="text-sm">Reply</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative m-2 p-2 border border-black w-[80%]">
-                        <p class="text-lg">User 2</p>
-                        <div>...msg here...</div>
-
-                        <div class="absolute right-0 top-0 m-0 p-0 flex flex-col items-end w-fit h-full">
-                            <div class="m-0 p-1 w-fit hover:cursor-pointer">
-                                <img src="imgs/threedots.png" class="h-5">
-                            </div>
-
-                            <div class="m-1 mt-auto p-0.5 border border-black w-fit hover:cursor-pointer">
-                                <p class="text-sm">Reply</p>
-                            </div>
-                        </div>
-                    </div>
+                    <message-box user="User 1" msg="...msg here..." time="1"></message-box>
+                    <message-box user="User 2" msg="...msg here..." time="2"></message-box>
                 </div>
             </div>
         </div>
