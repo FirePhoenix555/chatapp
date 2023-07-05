@@ -10,6 +10,11 @@ class ProgressRing extends HTMLElement {
         const offset = this._circumference - (percent * this._circumference);
         const circle = this._root.querySelector('circle');
         circle.style.strokeDashoffset = offset;
+
+        setTimeout(() => { // on load completion
+            let p = this.parentElement.parentElement.parentElement.parentElement.parentElement;
+            p.delete();
+        }, this.time * 1000);
     }
 
     // thank you stackoverflow!!
@@ -18,7 +23,7 @@ class ProgressRing extends HTMLElement {
         const stroke = this.getAttribute('stroke') || 1;
         const radius = this.getAttribute('radius') || 30;
         const strokeColor = this.getAttribute('stroke-color') || "black";
-        const time = this.getAttribute('time') || 1; // in seconds
+        this.time = this.getAttribute('time') || 1; // in seconds
 
         const normalizedRadius = radius - stroke * 2;
         this._circumference = normalizedRadius * 2 * Math.PI;
@@ -45,7 +50,7 @@ class ProgressRing extends HTMLElement {
 
             <style>
                 circle {
-                    transition: stroke-dashoffset ${time}s;
+                    transition: stroke-dashoffset ${this.time}s;
                     transform: rotate(-90deg);
                     transform-origin: 50% 50%;
                 }

@@ -3,6 +3,14 @@ class MessageBox extends HTMLElement {
         super();
     }
 
+    delete() {
+        // delete the message
+        this.parentElement.removeChild(this);
+
+        // send api delete
+        // TODO
+    }
+
     connectedCallback() {
         const user = this.getAttribute('user') || 'null';
         const msg = this.getAttribute('msg') || '&nbsp;';
