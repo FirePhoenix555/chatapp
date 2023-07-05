@@ -26,7 +26,7 @@ class MessageBox extends HTMLElement {
                 </div>
 
                 <div class="m-1 mt-auto p-0.5 border border-black w-fit hover:cursor-pointer">
-                    <p class="text-sm">Reply</p>
+                    <a class="text-sm no-underline text-black" href="/messages/?uid=${user /*make this the ID of the user at some point*/}">Reply</a>
                 </div>
             </div>
         `;
