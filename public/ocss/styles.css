@@ -595,6 +595,10 @@ video {
   margin-top: 0px;
 }
 
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
 .mt-auto {
   margin-top: auto;
 }
@@ -621,6 +625,10 @@ video {
 
 .h-5 {
   height: 1.25rem;
+}
+
+.h-\[20\%\] {
+  height: 20%;
 }
 
 .h-\[80\%\] {
@@ -651,6 +659,10 @@ video {
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .w-screen {
@@ -685,6 +697,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
