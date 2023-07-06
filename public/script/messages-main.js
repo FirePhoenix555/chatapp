@@ -6,9 +6,18 @@ function getUID(url) {
 
 window.onload = () => {
     const uid = getUID(location.href);
+
     if (!uid) {
         location.href = "/";
         throw new Error("UID not found.");
     }
-    console.log(uid);
+    
+    UIDCallback(uid);
+}
+
+
+function UIDCallback(UID) { // run when UID received
+    console.log(UID);
+
+    // send request to server for messages
 }
