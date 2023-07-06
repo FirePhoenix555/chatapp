@@ -1,0 +1,60 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "web" ]
+  pull_request:
+    branches: [ "web" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+  publish:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check out
+          uses: actions/checkout@v3
+  
+        - name: Generate your content
+          run: echo "Optional placeholder. Put your project's static website generator command here."
+  
+        - name: Publish current workdir (which contains generated content) to GitHub Pages
+          uses: rayluo/github-pages-overwriter@v1.3
+  
+          with:
+  
+            # Optional. Default value "." means the root directory of your project will be published.
+            # You can use whatever directory your project uses, for example "wwwroot".
+            # Such a directory does *not* have to already exist in your repo,
+            # it could be an output directory created dynamically by your static website builder.
+            source-directory: public
+  
+            # Optional. Default value "gh_pages".
+            # It specifies the temporary branch which hosts the static website.
+            # Each build will OVERWRITE this branch.
+            target-branch: gh_pages
