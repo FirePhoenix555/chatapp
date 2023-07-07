@@ -26,3 +26,9 @@ function lerp(oldmin, oldmax, newmin, newmax, val) {
     let t = (val - oldmin) / (oldmax - oldmin);
     return newmin + (newmax - newmin) * t;
 }
+
+function sendMessage(content) {
+    // send api thing
+    // todo
+    // make sure to pass in the content (html needs to be updated when I have a textarea)
+}
