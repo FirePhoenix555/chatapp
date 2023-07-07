@@ -17,14 +17,24 @@
         <div id="centerpiece" class="flex flex-col items-center justify-center w-screen h-screen overflow-hidden">
             <h1 class="text-2xl font-bold uppercase text-center border border-black border-b-0 w-[80%] min-w-[500px]">&lt; USER 1 &gt;</h1>
 
-            <div class="relative border border-black border-t-0 w-[80%] min-w-[500px] h-[80%] min-h-fit">
+            <div class="relative border border-black border-t-0 w-[80%] min-w-[500px] h-[80%] min-h-fit flex flex-col">
                 <div id="messages" class="overflow-y-scroll overflow-x-hidden h-[80%] flex flex-col items-center justify-end">
                     <message-box user="User 1" msg="...msg here..." time="1"></message-box>
                     <message-box user="User 2" msg="...msg here..." time="2"></message-box>
                 </div>
 
-                <div class="absolute bottom-0 border border-black w-full min-h-fit h-[20%] m-0 mt-3 flex flex-col justify-center">
-                    <p class="text-center">REPLY BOX</p>
+                <div class="self-end border-t border-black w-full min-h-fit h-[20%] m-0 mt-8 flex flex-col">
+                    <div class="border-b border-black flex justify-end items-center">
+                        <p class="mr-auto text-lg ml-5">REPLY</p>
+                        <div class="h-full ml-3 px-2 flex items-center border-x border-black hover:cursor-pointer">
+                            <p class="mr-1">TIMER</p>
+                            <img src="/imgs/timer.png" class="w-4 h-fit mx-1">
+                            <b class="ml-1">5s</b>
+                        </div>
+                        <div class="w-20 h-full mx-0 px-2 flex items-center hover:cursor-pointer">
+                            <p class="w-full text-center">SEND</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
