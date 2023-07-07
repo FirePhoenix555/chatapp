@@ -11,6 +11,7 @@
         <script src="/../script/elt/progress-ring.js"></script>
         <script src="/../script/elt/message-box.js"></script>
         <script src="/../script/elt/log-box.js"></script>
+        <script src="/../script/elt/timer-box.js"></script>
     </head>
 
     <body>
@@ -26,11 +27,9 @@
                 <div class="self-end border-t border-black w-full min-h-fit h-[20%] m-0 mt-8 flex flex-col">
                     <div class="border-b border-black flex justify-end items-center">
                         <p class="mr-auto text-lg ml-5">REPLY</p>
-                        <div class="h-full ml-3 px-2 flex items-center border-x border-black hover:cursor-pointer">
-                            <p class="mr-1">TIMER</p>
-                            <img src="/imgs/timer.png" class="w-4 h-fit mx-1">
-                            <b class="ml-1">5s</b>
-                        </div>
+
+                        <timer-box value="3"></timer-box>
+
                         <div class="w-20 h-full mx-0 px-2 flex items-center hover:cursor-pointer">
                             <p class="w-full text-center">SEND</p>
                         </div>

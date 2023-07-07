@@ -62,9 +62,10 @@ class MessageBox extends HTMLElement {
 
 // functionality from https://stackoverflow.com/questions/152975/how-do-i-detect-a-click-outside-an-element/3028037#3028037
 class CL { // click listener
-    constructor(parent, hidecb) {
+    constructor(parent, hidecb, div=parent.querySelector(".menu").querySelector('div'), menu=p=>p.querySelector('.menu')) {
         this.parent = parent;
-        this.div = this.parent.querySelector(".menu").querySelector('div');
+        this.div = div;
+        this.menu = menu;
         this.hidecb = hidecb;
         this.listeners = [];
     }
@@ -72,7 +73,7 @@ class CL { // click listener
     outsideClickListener(event) {
         if (event.type == "mouseout" && this.listeners.includes("click")) return; // if they've clicked, don't hide on a mouseout
 
-        const menu = this.parent.querySelector(".menu");
+        const menu = this.menu(this.parent);
         if (!menu.contains(event.target) && !this.div.hidden) {
             this.hidecb();
             this.removeClickListener(event.type);

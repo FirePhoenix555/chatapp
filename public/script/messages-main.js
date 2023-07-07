@@ -21,3 +21,8 @@ function UIDCallback(UID) { // run when UID received
 
     // send request to server for messages
 }
+
+function lerp(oldmin, oldmax, newmin, newmax, val) {
+    let t = (val - oldmin) / (oldmax - oldmin);
+    return newmin + (newmax - newmin) * t;
+}
