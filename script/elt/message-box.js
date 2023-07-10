@@ -11,14 +11,8 @@ class MessageBox extends HTMLElement {
         // TODO
     }
 
-    connectedCallback() {
-        const user = this.getAttribute('user') || 'null';
-        const msg = this.getAttribute('msg') || '&nbsp;';
-        const time = this.getAttribute('time') || 1; // in seconds
-
-        this.setAttribute("class", "relative m-2 p-2 border border-black w-[80%]")
-
-        this.innerHTML = `
+    genHTML(user, msg, time) {
+        return `
             <p class="text-lg">${user}</p>
             <div>${msg}</div>
 
@@ -38,6 +32,16 @@ class MessageBox extends HTMLElement {
                 </div>
             </div>
         `;
+    }
+
+    connectedCallback() {
+        const user = this.getAttribute('user') || 'null';
+        const msg = this.getAttribute('msg') || '&nbsp;';
+        const time = this.getAttribute('time') || 1; // in seconds
+
+        this.setAttribute("class", "relative m-2 p-2 border border-black w-[80%]")
+
+        this.innerHTML = this.genHTML(user, msg, time);
 
         const menu = this.querySelector(".menu");
 

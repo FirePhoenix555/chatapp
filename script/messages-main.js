@@ -27,8 +27,31 @@ function lerp(oldmin, oldmax, newmin, newmax, val) {
     return newmin + (newmax - newmin) * t;
 }
 
-function sendMessage(content) {
+function sendMessage(elt) {
     // send api thing
     // todo
-    // make sure to pass in the content (html needs to be updated when I have a textarea)
+
+    let content = elt.value;
+    elt.value = "";
+
+    console.log(content);
+
+    let m1 = Array.from(document.querySelectorAll("message-box"));
+    let m2 = Array.from(document.querySelectorAll("message-box-2"));
+    let m = m1.concat(m2);
+
+    for (let i = 0; i < m.length; i++) {
+        let menu = m[i].querySelector('.menu');
+        menu.querySelector('div').hidden = false;
+        menu.querySelector('progress-ring').hidden = false;
+        menu.querySelector('p').hidden = true;
+        setTimeout(() => menu.querySelector('progress-ring').setProgress(1), 10); // css transitions didn't work without this
+    }
+}
+
+function irec(event) { // ([textarea] i[nput] rec[eived])
+    if (event.keyCode == 13 && !event.shiftKey) {
+        sendMessage(event.target);
+        event.preventDefault();
+    }
 }

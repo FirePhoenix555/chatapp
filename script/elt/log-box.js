@@ -1,8 +1,10 @@
 class LogBox extends HTMLElement {
     constructor() {
         super();
-        
-        this.opened = true;
+    }
+
+    setCookie(state) {
+        document.cookie = "lbopen=" + state + ";";
     }
 
     toggle() {
@@ -17,6 +19,7 @@ class LogBox extends HTMLElement {
         }
 
         this.opened = !this.opened;
+        this.setCookie(this.opened);
     }
 
     addListener() {
@@ -37,6 +40,12 @@ class LogBox extends HTMLElement {
         `;
 
         this.addListener();
+
+        // saving open/closed states with cookies
+        this.opened = true;
+        let cookie = window.getCookie('lbopen');
+        if (exists(cookie) && (cookie === 'true') != this.opened) this.toggle();
+        else if (!exists(cookie)) this.setCookie(true);
     }
 }
 

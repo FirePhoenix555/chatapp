@@ -10,6 +10,7 @@
 
         <script src="/script/elt/progress-ring.js"></script>
         <script src="/script/elt/message-box.js"></script>
+        <script src="/script/elt/message-box-2.js"></script>
         <script src="/script/elt/log-box.js"></script>
         <script src="/script/elt/timer-box.js"></script>
     </head>
@@ -20,19 +21,23 @@
 
             <div class="relative border border-black border-t-0 w-[80%] min-w-[500px] h-[80%] min-h-fit flex flex-col">
                 <div id="messages" class="overflow-y-scroll overflow-x-hidden h-[80%] flex flex-col items-center justify-end">
-                    <message-box user="User 1" msg="...msg here..." time="1"></message-box>
-                    <message-box user="User 2" msg="...msg here..." time="2"></message-box>
+                    <message-box-2 user="User 1" msg="...msg here..." time="1"></message-box-2>
+                    <message-box-2 user="User 2" msg="...msg here..." time="2"></message-box-2>
                 </div>
 
                 <div class="self-end border-t border-black w-full min-h-fit h-[20%] m-0 mt-8 flex flex-col">
-                    <div class="border-b border-black flex justify-end items-center">
+                    <div class="h-[20%] border-b border-black flex justify-end items-center">
                         <p class="mr-auto text-lg ml-5">REPLY</p>
 
                         <timer-box value="3"></timer-box>
 
-                        <div class="w-20 h-full mx-0 px-2 flex items-center hover:cursor-pointer" onclick="sendMessage()">
+                        <div class="w-20 h-full mx-0 px-2 flex items-center hover:cursor-pointer" onclick="sendMessage(this.parentElement.parentElement.querySelector('textarea'))">
                             <p class="w-full text-center">SEND</p>
                         </div>
+                    </div>
+                    
+                    <div class="p-2 m-0 h-[80%]">
+                        <textarea class="resize-none h-full w-full outline-none" onkeypress="irec(event)"></textarea>
                     </div>
                 </div>
             </div>
