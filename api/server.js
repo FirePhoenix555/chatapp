@@ -53,8 +53,8 @@ async function getUser(id, res) {
 async function addUser(req, res, next) {
     let data;
     try { data = JSON.parse(fs.readFileSync('data/users.json')); }
-    catch { return sendError('Could not access users database', 404, res) }
-    if (!data) return sendError('Could not access users database', 404, res)
+    catch { return sendError('Could not access users database', 500, res) }
+    if (!data) return sendError('Could not access users database', 500, res)
 
     const id = (Object.keys(data).length + 1).toString().padStart(5, '0');
     const user = {
