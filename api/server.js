@@ -11,6 +11,12 @@ app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
 });
 
+app.use(require('cors')({
+    origin: '*' // TODO change this so you're not allowing all requests
+}));
+
+app.use(express.json());
+
 function findMessagesByRecipient(data, uid) {
     let a = [];
 
@@ -44,9 +50,30 @@ async function getUser(id, res) {
     res.end();
 }
 
+async function addUser(req, res, next) {
+    let data;
+    try { data = JSON.parse(fs.readFileSync('data/users.json')); }
+    catch { return sendError('Could not access users database', 404, res) }
+    if (!data) return sendError('Could not access users database', 404, res)
+
+    const id = (Object.keys(data).length + 1).toString().padStart(5, '0');
+    const user = {
+        id: id,
+        name: req.body.user,
+        phash: req.body.pass
+    };
+
+    data[id] = user;
+
+    fs.writeFileSync('data/users.json', JSON.stringify(data));
+
+    res.status(201).json(user);
+}
+
 router.route('/api/v1/messages/id/:mid').get((req, res, next) => getMessage(req.params.mid, res, "mid"));
 router.route('/api/v1/users/:uid').get((req, res, next) => getUser(req.params.uid, res));
 router.route('/api/v1/messages/usr/:uid').get((req, res, next) => getMessage(req.params.uid, res, "uid"));
+router.route('/api/v1/users/').post(addUser);
 
 app.use(router);
 
