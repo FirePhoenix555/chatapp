@@ -11,30 +11,42 @@ app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
 });
 
-async function getMessage(req, res, next) {
-    let mid = req.params.mid;
+function findMessagesByRecipient(data, uid) {
+    let a = [];
+
+    Object.values(data).forEach(val => {
+        if (val.to == uid) a.push(val);
+    });
+
+    return a;
+}
+
+async function getMessage(id, res, type) {
     let data = JSON.parse(fs.readFileSync('data/messages.json'));
 
-    const message = data[mid];
+    let message;
+    if (type == "mid") message = data[id];
+    else if (type == "uid") message = findMessagesByRecipient(data, id);
+
     if (!message) return sendError('Message not found', 404, res);
 
     res.json(message);
     res.end();
 }
 
-async function getUser(req, res, next) {
-    let uid = req.params.uid;
+async function getUser(id, res) {
     let data = JSON.parse(fs.readFileSync('data/users.json'));
 
-    const user = data[uid];
+    const user = data[id];
     if (!user) return sendError('Invalid user', 404, res);
 
     res.json(user);
     res.end();
 }
 
-router.route('/api/v1/messages/id/:mid').get(getMessage);
-router.route('/api/v1/users/:uid').get(getUser);
+router.route('/api/v1/messages/id/:mid').get((req, res, next) => getMessage(req.params.mid, res, "mid"));
+router.route('/api/v1/users/:uid').get((req, res, next) => getUser(req.params.uid, res));
+router.route('/api/v1/messages/usr/:uid').get((req, res, next) => getMessage(req.params.uid, res, "uid"));
 
 app.use(router);
 
