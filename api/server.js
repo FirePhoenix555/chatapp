@@ -11,9 +11,8 @@ app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
 });
 
-app.use(require('cors')({
-    origin: '*' // TODO change this so you're not allowing all requests
-}));
+const cors = require('cors');
+app.use(cors({ origin: 'https://chatapp.fires.tech' }));
 
 app.use(express.json());
 
