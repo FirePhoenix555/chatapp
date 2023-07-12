@@ -103,7 +103,23 @@ async function addMessage(req, res, next) {
     res.status(201).json(msg);
 }
 
-router.route('/api/v1/messages/id/:mid').get((req, res, next) => getMessage(req.params.mid, res, "mid"));
+async function deleteMessage(req, res, next) {
+    let data;
+    try { data = JSON.parse(fs.readFileSync('data/messages.json')); }
+    catch { return sendError('Could not access messages database', 500, res) }
+    if (!data) return sendError('Could not access messages database', 500, res)
+
+    let id = req.params.mid;
+    if (data[id]) {
+        res.json(data[id]);
+        delete data[id];
+        fs.writeFileSync('data/messages.json', JSON.stringify(data));
+    } else {
+        return sendError('Could not find message', 404, res);
+    }
+}
+
+router.route('/api/v1/messages/id/:mid').get((req, res, next) => getMessage(req.params.mid, res, "mid")).delete(deleteMessage);
 router.route('/api/v1/users/:uid').get((req, res, next) => getUser(req.params.uid, res));
 router.route('/api/v1/messages/usr/:uid').get((req, res, next) => getMessage(req.params.uid, res, "uid"));
 router.route('/api/v1/users/').post(addUser);
