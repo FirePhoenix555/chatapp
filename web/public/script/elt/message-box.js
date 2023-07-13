@@ -3,6 +3,12 @@ class MessageBox extends HTMLElement {
         super();
     }
 
+    initAttributes(usr, msg, time) {
+        this.setAttribute('user', usr);
+        this.setAttribute('msg', msg);
+        this.setAttribute('time', time);
+    }
+
     delete() {
         // delete the message
         this.parentElement.removeChild(this);
