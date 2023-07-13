@@ -4,22 +4,25 @@ function getUID(url) {
     return s[s.length - 1];
 }
 
-window.onload = () => {
-    const uid = getUID(location.href);
+async function gm(to, from) {
+    await genMessages(to, msg => {
+        return msg.from == from;
+    }, true);
+}
 
-    if (!uid) {
+window.onload = () => {
+    const to = window.getCookie('uid'); // todo add auth
+    
+    if (!to) location.href = "/login";
+
+    const from = getUID(location.href);
+
+    if (!from) {
         location.href = "/";
         throw new Error("UID not found.");
     }
-    
-    UIDCallback(uid);
-}
 
-
-function UIDCallback(UID) { // run when UID received
-    console.log(UID);
-
-    // send request to server for messages
+    gm(to, from);
 }
 
 function lerp(oldmin, oldmax, newmin, newmax, val) {

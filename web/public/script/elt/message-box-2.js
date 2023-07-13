@@ -1,6 +1,6 @@
 class MessageBox2 extends MessageBox {
-    constructor() {
-        super();
+    constructor(mid, uid) {
+        super(mid, uid);
     }
     
     genHTML(user, msg, time) {

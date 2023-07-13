@@ -1,6 +1,9 @@
 class MessageBox extends HTMLElement {
-    constructor() {
+    constructor(mid, uid) {
         super();
+
+        this.mid = mid;
+        this.uid = uid;
     }
 
     initAttributes(usr, msg, time) {
@@ -34,7 +37,7 @@ class MessageBox extends HTMLElement {
                 </div>
 
                 <div class="m-1 mt-auto p-0.5 border border-black w-fit hover:cursor-pointer">
-                    <a class="text-sm no-underline text-black" href="/messages/#${user /*make this the ID of the user at some point*/}">Reply</a>
+                    <a class="text-sm no-underline text-black" href="/messages/#${this.uid}">Reply</a>
                 </div>
             </div>
         `;
