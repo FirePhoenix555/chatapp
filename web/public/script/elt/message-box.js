@@ -12,12 +12,17 @@ class MessageBox extends HTMLElement {
         this.setAttribute('time', time);
     }
 
-    delete() {
-        // delete the message
-        this.parentElement.removeChild(this);
+    async delete() {
+        if (!this.parentElement) return; // already deleted
 
         // send api delete
-        // TODO
+        let req = new API_RequestHandler();
+        let res = await req.del('MESSAGE', { mid: this.mid });
+
+        if (res.status != 200) return;
+
+        // delete the message
+        this.parentElement.removeChild(this);
     }
 
     addToDocument(parent) {
