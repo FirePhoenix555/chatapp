@@ -20,6 +20,10 @@ class MessageBox extends HTMLElement {
         // TODO
     }
 
+    addToDocument(parent) {
+        parent.appendChild(this);
+    }
+
     genHTML(user, msg, time) {
         return `
             <p class="text-lg">${user}</p>

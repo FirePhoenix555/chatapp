@@ -28,7 +28,7 @@ async function genMessages(uid, valid=()=>true, ms2) {
         else messagebox = new MessageBox2(msg.id, msg.from);
         messagebox.initAttributes(msg.from + "todo make this actual user w another get", msg.content, msg.time);
 
-        div.appendChild(messagebox);
+        messagebox.addToDocument(div);
     }
 }
 

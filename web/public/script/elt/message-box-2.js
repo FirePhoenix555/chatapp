@@ -2,6 +2,10 @@ class MessageBox2 extends MessageBox {
     constructor(mid, uid) {
         super(mid, uid);
     }
+
+    addToDocument(parent) {
+        parent.prepend(this);
+    }
     
     genHTML(user, msg, time) {
         return `

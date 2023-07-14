@@ -770,6 +770,10 @@ video {
   flex-direction: column;
 }
 
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
 .items-end {
   align-items: flex-end;
 }
