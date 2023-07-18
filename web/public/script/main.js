@@ -22,11 +22,17 @@ async function genMessages(uid, valid=()=>true, ms2) {
         let msg = data[i];
 
         if (!valid(msg)) continue;
+
+        let ures = await req.get('USER', { uid: msg.from });
+        let udata = await ures.json();
+        let username = udata.user;
         
         let messagebox;
         if (!ms2) messagebox = new MessageBox(msg.id, msg.from);
         else messagebox = new MessageBox2(msg.id, msg.from);
-        messagebox.initAttributes(msg.from + "todo make this actual user w another get", msg.content, msg.time);
+
+
+        messagebox.initAttributes(username, msg.content, msg.time);
 
         messagebox.addToDocument(div);
     }
