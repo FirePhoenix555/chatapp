@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/ocss/styles.css">
 
+        <script>
+            function login(e) {
+                const t = e.target;
+
+                const user = t.querySelector('#user');
+                const pass = t.querySelector('#pass');
+
+                document.cookie = `uid=${user.value};path=/;`; // todo: auth, get uid from username
+
+                e.preventDefault();
+
+                location.href = "/";
+            }
+        </script>
     </head>
 
     <body>
+        <div class="w-full h-96 m-0 p-0 flex flex-col items-center justify-center">
+            <p>Create account</p>
+            <form class="flex flex-col w-40" onsubmit="login(event)">
+                <label for="user">Username</label>
+                <input id="user" name="user" type="text" class="border border-black">
 
+                <label for="pass">Password</label>
+                <input id="pass" name="pass" type="password" class="border border-black">
+
+                <input type="submit" value="Submit" class="border border-black">
+            </form>
+        </div>
     </body>
 </html>

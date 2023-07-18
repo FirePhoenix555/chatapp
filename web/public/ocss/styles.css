@@ -685,6 +685,10 @@ video {
   height: 1.25rem;
 }
 
+.h-96 {
+  height: 24rem;
+}
+
 .h-\[20\%\] {
   height: 20%;
 }
@@ -721,6 +725,10 @@ video {
 
 .w-4 {
   width: 1rem;
+}
+
+.w-40 {
+  width: 10rem;
 }
 
 .w-\[80\%\] {
