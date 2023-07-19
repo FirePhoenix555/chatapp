@@ -17,8 +17,11 @@ async function genMessages(uid, valid=()=>true, ms2) {
     let data = await res.json();
 
     let div = document.getElementById('messages');
+
+    let rm = [];
+    let messages = [];
     
-    for (let i = 0; i < data.length; i++) {
+    for (let i = data.length - 1; i >= 0; i--) {
         let msg = data[i];
 
         if (!valid(msg)) continue;
@@ -28,13 +31,22 @@ async function genMessages(uid, valid=()=>true, ms2) {
         let username = udata.user;
         
         let messagebox;
-        if (!ms2) messagebox = new MessageBox(msg.id, msg.from);
-        else messagebox = new MessageBox2(msg.id, msg.from);
+        if (!ms2) {
+            messagebox = new MessageBox(msg.id, msg.from);
 
+            if (rm.includes(msg.from)) continue;
+            else rm.push(msg.from);
+        } else {
+            messagebox = new MessageBox2(msg.id, msg.from);
+        }
 
         messagebox.initAttributes(username, msg.content, msg.time);
 
-        messagebox.addToDocument(div);
+        messages.push(messagebox);
+    }
+
+    for (let i = messages.length - 1; i >= 0; i--) { // essentially reversing array before looping normally
+        messages[i].addToDocument(div);
     }
 }
 
