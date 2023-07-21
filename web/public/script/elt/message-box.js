@@ -1,14 +1,32 @@
 class MessageBox extends HTMLElement {
-    constructor() {
+    constructor(mid, uid) {
         super();
+
+        this.mid = mid;
+        this.uid = uid;
     }
 
-    delete() {
-        // delete the message
-        this.parentElement.removeChild(this);
+    initAttributes(usr, msg, time) {
+        this.setAttribute('user', usr);
+        this.setAttribute('msg', msg);
+        this.setAttribute('time', time);
+    }
+
+    async delete() {
+        if (!this.parentElement) return; // already deleted
 
         // send api delete
-        // TODO
+        let req = new API_RequestHandler();
+        let res = await req.del('MESSAGE', { mid: this.mid });
+
+        if (res.status != 200) return;
+
+        // delete the message
+        this.parentElement.removeChild(this);
+    }
+
+    addToDocument(parent) {
+        parent.appendChild(this);
     }
 
     genHTML(user, msg, time) {
@@ -28,7 +46,7 @@ class MessageBox extends HTMLElement {
                 </div>
 
                 <div class="m-1 mt-auto p-0.5 border border-black w-fit hover:cursor-pointer">
-                    <a class="text-sm no-underline text-black" href="/messages/#${user /*make this the ID of the user at some point*/}">Reply</a>
+                    <a class="text-sm no-underline text-black" href="/messages/#${this.uid}">Reply</a>
                 </div>
             </div>
         `;

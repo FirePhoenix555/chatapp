@@ -4,22 +4,27 @@ function getUID(url) {
     return s[s.length - 1];
 }
 
-window.onload = () => {
-    const uid = getUID(location.href);
+async function gm(to, from) {
+    await genMessages(to, msg => {
+        return msg.from == from;
+    }, true);
+}
 
-    if (!uid) {
+let liuser, msuser; // logged in; messaged
+
+window.onload = () => {
+    liuser = window.getCookie('uid'); // todo add auth
+    
+    if (!liuser) location.href = "/login";
+
+    msuser = getUID(location.href);
+
+    if (!msuser) {
         location.href = "/";
         throw new Error("UID not found.");
     }
-    
-    UIDCallback(uid);
-}
 
-
-function UIDCallback(UID) { // run when UID received
-    console.log(UID);
-
-    // send request to server for messages
+    gm(liuser, msuser);
 }
 
 function lerp(oldmin, oldmax, newmin, newmax, val) {
@@ -27,14 +32,19 @@ function lerp(oldmin, oldmax, newmin, newmax, val) {
     return newmin + (newmax - newmin) * t;
 }
 
-function sendMessage(elt) {
+async function sendMessage(textarea, timerbox) {
     // send api thing
-    // todo
+    let req = new API_RequestHandler();
+    let res = await req.post('MESSAGE', {
+        from: liuser,
+        to: msuser,
+        content: textarea.value,
+        time: timerbox.getAttribute('value')
+    });
 
-    let content = elt.value;
-    elt.value = "";
+    if (res.status != 201) return;
 
-    console.log(content);
+    textarea.value = "";
 
     let m1 = Array.from(document.querySelectorAll("message-box"));
     let m2 = Array.from(document.querySelectorAll("message-box-2"));
@@ -51,7 +61,7 @@ function sendMessage(elt) {
 
 function irec(event) { // ([textarea] i[nput] rec[eived])
     if (event.keyCode == 13 && !event.shiftKey) {
-        sendMessage(event.target);
+        sendMessage(event.target, event.target.parentElement.parentElement.querySelector('timer-box'));
         event.preventDefault();
     }
 }
